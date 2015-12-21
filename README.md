@@ -23,7 +23,9 @@ Steps
  - Run 
  yo generator
 
-- npm link
+Because generator-yoyo was specified as the package name in package.json, npm link will create a symbolic link in a more widely-accessible location (e.g., /usr/local/lib/node_modules/generator-yoyo). This enables you to access your local ~/dev/generator-yoyo generator globally, making development, and life in general, much easier.
+
+- cd generator-yoyo && npm link
 
 
 
