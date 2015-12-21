@@ -51,10 +51,10 @@ module.exports = yeoman.generators.Base.extend({
     if (this.addDemoSection) {
       var context = {
         content: "Demo Section",
-        id: "Demo Section"
+        id: "DemoSection"
       }
 
-      var fileBase = Date.now() + "_" + "demo_section");
+      var fileBase = Date.now() + "_" + "demo_section";
       var htmlFile = "app/sections/" + fileBase + ".html";
       var cssFile  = "app/css/" + fileBase + ".css"; 
 
