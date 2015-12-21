@@ -17,6 +17,11 @@ npm install -g npm
 - Also install generator-generator as follows
 npm install -g yo generator-generator
 
+- underscore.string
+npm install underscore.string --save-dev
+
+- classify
+
 Steps 
 -----
 
