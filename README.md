@@ -1,7 +1,7 @@
 yoyo
 ====
 
-yoyo is a multi-purpose generator built using yeoman
+yoyo is a multi-purpose scaffolding system built using yeoman
 
 Requirements
 ------------
