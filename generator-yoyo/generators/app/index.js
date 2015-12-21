@@ -7,12 +7,14 @@ module.exports = yeoman.generators.Base.extend({
     promptUser: function() {
         var done = this.async();
  
-        // have Yeoman greet the user
-        console.log(this.yeoman);
- 
+        // Have Yeoman greet the user.
+        this.log(yosay(
+          'Welcome to the perfect ' + chalk.red('generator-yoyo') + ' generator!'
+          ));
+        
         var prompts = [{
             name: 'appName',
-            message: 'What is your project name ?'
+            message: 'What is your app\'s name ?'
         },{
             type: 'confirm',
             name: 'addDemoSection',
