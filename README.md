@@ -22,8 +22,8 @@ npm install underscore.string --save-dev
 
 - classify
 
-Steps 
------
+Meta 
+------------------------
 
  - Run 
  yo generator
