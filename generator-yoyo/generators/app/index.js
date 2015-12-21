@@ -14,14 +14,14 @@ module.exports = yeoman.generators.Base.extend({
 
     var prompts = [{
       type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
+      name: 'projectName',
+      message: 'What would you like to call your project?',
       default: true
     }];
 
     this.prompt(prompts, function (props) {
       this.props = props;
-      // To access props later use this.props.someOption;
+      // To access props later use this.props.projectName;
 
       done();
     }.bind(this));
