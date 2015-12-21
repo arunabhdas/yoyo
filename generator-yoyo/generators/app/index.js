@@ -38,6 +38,7 @@ var YoYoGenerator = yeoman.generators.Base.extend({
         }.bind(this));
     },
   scaffoldFolders: function(){
+    console.log("scaffoldFolders");
     this.destinationPath("app");
     this.destinationPath("app/css");
     this.destinationPath("app/sections");
@@ -48,6 +49,7 @@ var YoYoGenerator = yeoman.generators.Base.extend({
     // this.mkdirp("build");
   },
   copyMainFiles: function(){
+    console.log("copyMainFiles");
     this.copy("_footer.html", "app/footer.html");
     this.copy("_gruntfile.js", "Gruntfile.js");
     this.copy("_package.json", "package.json");
@@ -60,6 +62,7 @@ var YoYoGenerator = yeoman.generators.Base.extend({
     this.template("_header.html", "app/header.html", context);
   },
   generateDemoSection: function(){
+    console.log("generateDemoSection");
     if (this.addDemoSection) {
       var context = {
         content: "Demo Section",
@@ -74,27 +77,16 @@ var YoYoGenerator = yeoman.generators.Base.extend({
       this.template("_section.css", cssFile, context);
     }
   },
-  generateMenu: function(){
-    var menu = this.read("_menu.html");
-
-    var t = '<a><%= name %></a>';
-    var files = this.expand("app/sections/*.html");
-
-    for (var i = 0; i < files.length; i++) {
-      var name = this._.chain(files[i]).strRight("_").strLeftBack(".html").humanize().value();
-
-      var context = {
-        name: name,
-        id: this._.classify(name)
-      };
-
-      var link = this.engine(t, context);
-      menu = this.append(menu, "div.menu", link);
-    }
-
-    this.write("app/menu.html", menu);
+  writing: function () {
+    console.log("writing");
+    this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath('public/index.html'),
+      { title: 'Templating with Yeoman' }
+    );
   },
   runNpm: function(){
+    console.log("runNpm");
     var done = this.async();
     this.npmInstall("", function(){
       console.log("\nEverything Setup !!!\n");
