@@ -22,8 +22,6 @@ npm install underscore.string --save-dev
 
 * classify
 
-* npm install mkdirp --save
-
 Meta 
 ------------------------
 

@@ -2,8 +2,16 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var generators = require('yeoman-generator');
 
 var YoYoGenerator = yeoman.generators.Base.extend({
+   constructor: function () {
+    // Calling the super constructor is important so our generator is correctly set up
+    generators.Base.apply(this, arguments);
+
+    // Next, add your custom code
+    this.option('coffee'); // This method adds support for a `--coffee` flag
+  },
     promptUser: function() {
         var done = this.async();
  
@@ -30,10 +38,14 @@ var YoYoGenerator = yeoman.generators.Base.extend({
         }.bind(this));
     },
   scaffoldFolders: function(){
-    this.mkdir("app");
-    this.mkdir("app/css");
-    this.mkdir("app/sections");
-    this.mkdir("build");
+    this.destinationPath("app");
+    this.destinationPath("app/css");
+    this.destinationPath("app/sections");
+    this.destinationPath("build");
+    // this.mkdirp("app");
+    // this.mkdirp("app/css");
+    // this.mkdirp("app/sections");
+    // this.mkdirp("build");
   },
   copyMainFiles: function(){
     this.copy("_footer.html", "app/footer.html");
