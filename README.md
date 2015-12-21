@@ -23,4 +23,6 @@ Steps
  - Run 
  yo generator
 
+ - Edit generator-yoyo/generators/app/index.js
+
 
