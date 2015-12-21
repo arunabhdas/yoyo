@@ -26,3 +26,10 @@ Steps
  - Edit generator-yoyo/generators/app/index.js
 
 
+
+Running
+-------
+
+- npm link
+
+- yo yoyo
