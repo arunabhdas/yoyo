@@ -3,7 +3,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
+var YoYoGenerator = yeoman.generators.Base.extend({
     promptUser: function() {
         var done = this.async();
  
@@ -90,3 +90,5 @@ module.exports = yeoman.generators.Base.extend({
     });
   }
 });
+
+module.exports = YoYoGenerator;

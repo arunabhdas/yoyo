@@ -39,4 +39,4 @@ Usage
 -------
 
 
-- yo yoyo
+- cd yoyo-testbed && yo yoyo
