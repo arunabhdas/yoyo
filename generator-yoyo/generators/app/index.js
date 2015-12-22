@@ -2,97 +2,87 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
-var generators = require('yeoman-generator');
 
-var YoYoGenerator = yeoman.generators.Base.extend({
-   constructor: function () {
-    // Calling the super constructor is important so our generator is correctly set up
-    generators.Base.apply(this, arguments);
-
-    // Next, add your custom code
-    this.option('coffee'); // This method adds support for a `--coffee` flag
+module.exports = yeoman.generators.Base.extend({
+  //Configurations will be loaded here.
+  //Ask for user input
+  prompting: function() {
+    var done = this.async();
+    this.prompt({
+      type: 'input',
+      name: 'name',
+      message: 'Your project name',
+      //Defaults to the project's folder name if the input is skipped
+      default: this.appname
+    }, function(answers) {
+      this.props = answers;
+      this.log(answers.name);
+      done();
+    }.bind(this));
   },
-    promptUser: function() {
-        var done = this.async();
- 
-        // Have Yeoman greet the user.
-        this.log(yosay(
-          'Welcome to the perfect ' + chalk.red('generator-yoyo') + ' generator!'
-          ));
-        
-        var prompts = [{
-            name: 'appName',
-            message: 'What is your app\'s name ?'
-        },{
-            type: 'confirm',
-            name: 'addDemoSection',
-            message: 'Would you like to generate a demo section ?',
-            default: true
-        }];
- 
-        this.prompt(prompts, function (props) {
-            this.appName = props.appName;
-            this.addDemoSection = props.addDemoSection;
-   
-            done();
-        }.bind(this));
+  //Writing Logic here
+  writing: {
+    //Copy the configuration files
+    config: function() {
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'), {
+          name: this.props.name
+        }
+      );
+      this.fs.copyTpl(
+        this.templatePath('_bower.json'),
+        this.destinationPath('bower.json'), {
+          name: this.props.name
+        }
+      );
+      this.fs.copy(
+        this.templatePath('bowerrc'),
+        this.destinationPath('.bowerrc')
+      );
     },
-  scaffoldFolders: function(){
-    console.log("scaffoldFolders");
-    this.destinationPath("app");
-    this.destinationPath("app/css");
-    this.destinationPath("app/sections");
-    this.destinationPath("build");
-    // this.mkdirp("app");
-    // this.mkdirp("app/css");
-    // this.mkdirp("app/sections");
-    // this.mkdirp("build");
-  },
-  copyMainFiles: function(){
-    console.log("copyMainFiles");
-    this.copy("_footer.html", "app/footer.html");
-    this.copy("_gruntfile.js", "Gruntfile.js");
-    this.copy("_package.json", "package.json");
-    this.copy("_main.css", "app/css/main.css");    
 
-    var context = { 
-      site_name: this.appName 
-    };
+    //Copy application files
+    app: function() {
+      //Server file
+      this.fs.copyTpl(
+        this.templatePath('_server.js'),
+        this.destinationPath('server.js'),
+        this.destinationPath('views/index.ejs'), {
+          name: this.props.name
+        }
+      );
+      /////Routes
+      this.fs.copy(
+        this.templatePath('_routes/_all.js'),
+        this.destinationPath('routes/all.js'));
 
-    this.template("_header.html", "app/header.html", context);
-  },
-  generateDemoSection: function(){
-    console.log("generateDemoSection");
-    if (this.addDemoSection) {
-      var context = {
-        content: "Demo Section",
-        id: "DemoSection"
-      }
 
-      var fileBase = Date.now() + "_" + "demo_section";
-      var htmlFile = "app/sections/" + fileBase + ".html";
-      var cssFile  = "app/css/" + fileBase + ".css"; 
+      // Model
+      this.fs.copy(
+        this.templatePath('_model/_todo.js'),
+        this.destinationPath('model/todo.js'));
 
-      this.template("_section.html", htmlFile, context);
-      this.template("_section.css", cssFile, context);
+      // Views
+      this.fs.copyTpl(
+        this.templatePath('_views/_index.ejs'),
+        this.destinationPath('views/index.ejs'), {
+          name: this.props.name
+        }
+      );
+
+      // Public/
+      this.fs.copy(
+        this.templatePath('_public/_css/_app.css'),
+        this.destinationPath('public/css/app.css')
+      );
+      this.fs.copy(
+        this.templatePath('_public/_js/_app.js'),
+        this.destinationPath('public/js/app.js')
+      );
     }
   },
-  writing: function () {
-    console.log("writing");
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('public/index.html'),
-      { title: 'Templating with Yeoman' }
-    );
-  },
-  runNpm: function(){
-    console.log("runNpm");
-    var done = this.async();
-    this.npmInstall("", function(){
-      console.log("\nEverything Setup !!!\n");
-      done();
-    });
+  install: function() {
+    this.installDependencies();
   }
 });
-
-module.exports = YoYoGenerator;
