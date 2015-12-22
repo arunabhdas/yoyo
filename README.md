@@ -67,7 +67,8 @@ identical .bowerrc
 I'm all done. Running npm install & bower install for you to install the required dependencies. If this fails, try running the command yourself.
 
 
-froyo@ /Users/coder/repos/ad/githubrepos/yoyo/testbed-yoyo
+froyo@ <path-to>/testflight-yoyo
+
 ├─┬ body-parser@1.14.2 
 │ ├── bytes@2.2.0 
 │ ├── content-type@1.0.1 
@@ -157,7 +158,7 @@ npm WARN froyo@ No license field.
 
 ==> npm start
 
-> froyo@ start /Users/coder/repos/ad/githubrepos/yoyo/testflight-yoyo
+> froyo@ start <path-to>/testflight-yoyo
 > node server.js
 
 body-parser deprecated undefined extended: provide extended option server.js:21:20
