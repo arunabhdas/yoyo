@@ -35,8 +35,16 @@ Usage
 -------
 
 
-- cd yoyo-testbed && yo yoyo
+* cd testflight-yoyo && yo yoyo
 
+* This should create all the files in testflight-yoyo
+
+* Open a new terminal window and start mongodb as follows
+./mongod --dbpath=<absolute-path-to>/mongodb/data/db
+
+* cd testflight-yoyo && npm start
+
+* Open browser and point it to localhost:8080
 
 
 Testflight
@@ -137,3 +145,21 @@ npm WARN mongodb-core@1.2.26 requires a peer of kerberos@~0.0 but none was insta
 npm WARN froyo@ No description
 npm WARN froyo@ No repository field.
 npm WARN froyo@ No license field.
+
+
+
+* Start mongod here
+
+
+*  npm install -g bower
+
+* bower install
+
+==> npm start
+
+> froyo@ start /Users/coder/repos/ad/githubrepos/yoyo/testflight-yoyo
+> node server.js
+
+body-parser deprecated undefined extended: provide extended option server.js:21:20
+[Function]
+App listening at port 8080
